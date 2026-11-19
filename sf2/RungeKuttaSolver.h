@@ -59,6 +59,8 @@ private:
         m = static_cast<double>(p.density) * a * a * a;
 
         const double d = 2.0 / 3.0, o = -1.0 / 4.0;
+
+        // clang-format off
         I = m * a * a * glm::dmat3(
             d, o, o,
             o, d, o,
@@ -72,6 +74,7 @@ private:
             18, 30, 18,
             18, 18, 30
         );
+        // clang-format on
 
         r_c = glm::dvec3(0.5 * a);
 

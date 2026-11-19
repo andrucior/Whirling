@@ -29,7 +29,7 @@ void SceneObject::EnsureBuffers()
 }
 
 void SceneObject::SetGeometry(const float* vertices, size_t vertexFloatCount, const unsigned int* indices,
-                               size_t indexCount, GLenum drawMode, GLenum usage)
+                              size_t indexCount, GLenum drawMode, GLenum usage)
 {
     EnsureBuffers();
     if (m_EBO == 0)
@@ -85,8 +85,9 @@ void SceneObject::ReserveVertices(size_t vertexFloatCapacity, GLenum drawMode, G
 
 void SceneObject::UpdateVertices(const float* vertices, size_t vertexFloatCount, size_t vertexFloatOffset) const
 {
-    if (vertexFloatCount == 0) return;
-    
+    if (vertexFloatCount == 0)
+        return;
+
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
     glBufferSubData(GL_ARRAY_BUFFER, static_cast<GLintptr>(vertexFloatOffset * sizeof(float)),
                     static_cast<GLsizeiptr>(vertexFloatCount * sizeof(float)), vertices);
@@ -119,13 +120,14 @@ glm::mat4 SceneObject::GetModelMatrix() const
     glm::mat4 r = glm::mat4_cast(m_Rotation);
     glm::mat4 s = glm::scale(glm::mat4(1.0f), m_Scale);
     glm::mat4 p = glm::translate(glm::mat4(1.0f), -m_Pivot);
-    return t * r * s * p; 
+    return t * r * s * p;
 }
 
 void SceneObject::Draw(const ShaderProgram& shader, const glm::mat4& viewProjection) const
 {
     const GLsizei count = m_DrawSource == DrawSource::Elements ? m_IndexCount : m_VertexCount;
-    if (count == 0) return;
+    if (count == 0)
+        return;
 
     glm::mat4 mvp = viewProjection * GetModelMatrix();
     shader.SetMat4("uMVP", mvp);

@@ -6,14 +6,14 @@ class Cube : public SceneObject
 {
 private:
     static const inline float kCubeVertices[] = {
-        -0.5f, -0.5f, 0.5f,  // front-bottom-left 
+        -0.5f, -0.5f, 0.5f,  // front-bottom-left
         0.5f,  -0.5f, 0.5f,  // front-bottom-right
-        0.5f,  0.5f,  0.5f,  // front-top-right   
-        -0.5f, 0.5f,  0.5f,  // front-top-left 
-        -0.5f, -0.5f, -0.5f, // back-bottom-left  
-        0.5f,  -0.5f, -0.5f, // back-bottom-right 
-        0.5f,  0.5f,  -0.5f, // back-top-right 
-        -0.5f, 0.5f,  -0.5f, // back-top-left   
+        0.5f,  0.5f,  0.5f,  // front-top-right
+        -0.5f, 0.5f,  0.5f,  // front-top-left
+        -0.5f, -0.5f, -0.5f, // back-bottom-left
+        0.5f,  -0.5f, -0.5f, // back-bottom-right
+        0.5f,  0.5f,  -0.5f, // back-top-right
+        -0.5f, 0.5f,  -0.5f, // back-top-left
     };
 
     static const inline unsigned int kCubeIndices[] = {
@@ -28,5 +28,7 @@ private:
 public:
     Cube(glm::vec3 pivot = glm::vec3{-0.5f, -0.5f, -0.5f})
         : SceneObject(kCubeVertices, sizeof(kCubeVertices) / sizeof(float), kCubeIndices,
-                      sizeof(kCubeIndices) / sizeof(unsigned int), /*drawAsLines=*/true, pivot) {}
+                      sizeof(kCubeIndices) / sizeof(unsigned int), /*drawAsLines=*/true, pivot)
+    {
+    }
 };

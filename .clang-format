@@ -1,20 +1,10 @@
-BasedOnStyle: Microsoft
-Language: Cpp
-Standard: c++20
+BasedOnStyle : Microsoft Language : Cpp Standard : c++ 20
 
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
-ColumnLimit: 120
+                                                   IndentWidth : 4 TabWidth : 4 UseTab : Never ColumnLimit : 120
 
-BreakBeforeBraces: Allman
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: Empty
+                                                                                         BreakBeforeBraces
+    : Allman AllowShortIfStatementsOnASingleLine : false AllowShortLoopsOnASingleLine
+    : false AllowShortFunctionsOnASingleLine : Empty
 
-PointerAlignment: Left
-ReferenceAlignment: Left
-SpaceBeforeParens: ControlStatements
-AlignTrailingComments: true
-SortIncludes: Never
-AccessModifierOffset: -4
+                                                   PointerAlignment : Left ReferenceAlignment : Left SpaceBeforeParens
+    : ControlStatements AlignTrailingComments : true SortIncludes : Never AccessModifierOffset : -4

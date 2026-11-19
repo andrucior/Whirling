@@ -82,7 +82,7 @@ public:
 
 protected:
     void SetGeometry(const float* vertices, size_t vertexFloatCount, const unsigned int* indices, size_t indexCount,
-                      GLenum drawMode, GLenum usage = GL_STATIC_DRAW);
+                     GLenum drawMode, GLenum usage = GL_STATIC_DRAW);
 
     void ReserveVertices(size_t vertexFloatCapacity, GLenum drawMode, GLenum usage = GL_DYNAMIC_DRAW);
 

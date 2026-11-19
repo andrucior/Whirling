@@ -31,7 +31,6 @@ void ShutdownImGui();
 GLFWwindow* Startup();
 void Shutdown(GLFWwindow* window);
 void DrawCubeSection(Simulation& sim);
-void DrawCubeSection(Simulation& sim);
 void DrawControlPanel(Simulation& sim, RenderSettings& renderSettings);
 void DrawDisplaySection(RenderSettings& settings);
 void DrawSimSection(Simulation& sim);

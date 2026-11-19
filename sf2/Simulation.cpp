@@ -10,7 +10,6 @@ constexpr glm::dvec3 kBodyDiagonal(kInvSqrt3, kInvSqrt3, kInvSqrt3);
 constexpr glm::dvec3 kWorldUp(0.0, 1.0, 0.0);
 constexpr glm::dvec3 kTiltAxis(0.0, 0.0, 1.0);
 
-
 Simulation::Simulation()
 {
     Reset();
@@ -57,8 +56,7 @@ Simulation::Energy Simulation::ComputeEnergy() const
 
     Energy energy;
     energy.kinetic = 0.5 * glm::dot(m_W, m_Solver.inertia() * m_W);
-    energy.potential =
-        m_Params.gravityOn ? -m_Solver.mass() * glm::dot(glm::dvec3(m_Params.g), centerOfMass) : 0.0;
+    energy.potential = m_Params.gravityOn ? -m_Solver.mass() * glm::dot(glm::dvec3(m_Params.g), centerOfMass) : 0.0;
     return energy;
 }
 
