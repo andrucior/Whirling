@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# Enforces clang-format and clang-tidy on tracked C++ sources before a push.
+# Enable once per clone with: git config core.hooksPath .githooks
+set -u
+
+repo_root=$(git rev-parse --show-toplevel) || exit 1
+cd "$repo_root" || exit 1
+
+find_tool() {
+    local name="$1"
+    if command -v "$name" >/dev/null 2>&1; then
+        command -v "$name"
+        return 0
+    fi
+    local candidates=(
+        "/d/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/$name.exe"
+        "/c/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/$name.exe"
+    )
+    local found
+    found=$(find "/c/Program Files/Microsoft Visual Studio" "/d/Program Files/Microsoft Visual Studio" \
+        -maxdepth 6 -iname "$name.exe" -path "*Llvm/x64/bin*" 2>/dev/null | head -n1)
+    candidates+=("$found")
+    for c in "${candidates[@]}"; do
+        if [ -n "$c" ] && [ -x "$c" ]; then
+            echo "$c"
+            return 0
+        fi
+    done
+    return 1
+}
+
+CLANG_FORMAT=$(find_tool clang-format) || {
+    echo "pre-push: clang-format not found (install the 'C++ Clang tools for Windows' VS component, or add it to PATH)." >&2
+    exit 1
+}
+CLANG_TIDY=$(find_tool clang-tidy) || {
+    echo "pre-push: clang-tidy not found (install the 'C++ Clang tools for Windows' VS component, or add it to PATH)." >&2
+    exit 1
+}
+
+mapfile -t files < <(git ls-files -- 'sf2/*.cpp' 'sf2/*.h' 'sf2/*.hpp' ':!:sf2/vcpkg_installed/*')
+
+if [ ${#files[@]} -eq 0 ]; then
+    exit 0
+fi
+
+unformatted=()
+echo "pre-push: checking clang-format..."
+for f in "${files[@]}"; do
+    if ! "$CLANG_FORMAT" --dry-run --Werror -style=file:"$repo_root/.clang-format" "$f" >/dev/null 2>&1; then
+        echo "  not formatted: $f"
+        unformatted+=("$f")
+    fi
+done
+
+if [ ${#unformatted[@]} -ne 0 ]; then
+    echo "pre-push: some files are not clang-format compliant." >&2
+    echo "Run this to fix, then commit the result:" >&2
+    for f in "${unformatted[@]}"; do
+        echo "  \"$CLANG_FORMAT\" -i -style=file:\"$repo_root/.clang-format\" \"$f\"" >&2
+    done
+    exit 1
+fi
+echo "pre-push: clang-format OK"
+
+VCPKG_INCLUDE="$repo_root/sf2/vcpkg_installed/x64-windows/x64-windows/include"
+if [ ! -d "$VCPKG_INCLUDE" ]; then
+    echo "pre-push: $VCPKG_INCLUDE not found (build the solution at least once to restore vcpkg deps) - skipping clang-tidy." >&2
+    exit 0
+fi
+
+tidy_failed=0
+echo "pre-push: checking clang-tidy..."
+for f in "${files[@]}"; do
+    case "$f" in
+        *.cpp)
+            out=$("$CLANG_TIDY" --quiet "$f" -- -std=c++20 -I "$VCPKG_INCLUDE" -I "$repo_root/sf2" -DWIN32 2>&1)
+            if echo "$out" | grep -qE "warning:|error:"; then
+                echo "--- $f ---"
+                echo "$out" | grep -E "warning:|error:"
+                tidy_failed=1
+            fi
+            ;;
+    esac
+done
+
+if [ "$tidy_failed" -ne 0 ]; then
+    echo "pre-push: clang-tidy found issues (see above). Fix them or adjust .clang-tidy, then try again." >&2
+    exit 1
+fi
+echo "pre-push: clang-tidy OK"
+
+exit 0

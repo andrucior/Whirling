@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{5b7e0a3d-8d9a-4f46-909f-4fd92b9ee386}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Simulation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MouseController.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneShader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RungeKuttaSolver.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Trajectory.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Polyline.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityPlane.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneView.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulation.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

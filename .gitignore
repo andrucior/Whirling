@@ -1,0 +1,9 @@
+.vs/
+bin/
+obj/
+vcpkg_installed/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+imgui.ini

@@ -1,0 +1,17 @@
+{
+  "name": "sf2",
+  "version": "1.0.0",
+  "builtin-baseline": "7cc5ff8668babd02224d51af40d32f5e0b07868c",
+  "dependencies": [
+    "glfw3",
+    "glew",
+    "glm",
+    {
+      "name": "imgui",
+      "features": [
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    }
+  ]
+}

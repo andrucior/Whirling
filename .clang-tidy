@@ -1,0 +1,21 @@
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  performance-*,
+  modernize-use-nullptr,
+  modernize-use-bool-literals,
+  modernize-use-override,
+  readability-braces-around-statements,
+  readability-else-after-return,
+  readability-redundant-control-flow,
+  readability-redundant-declaration,
+  readability-duplicate-include,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-narrowing-conversions,
+  -bugprone-exception-escape,
+  -performance-no-int-to-ptr
+
+WarningsAsErrors: '*'
+HeaderFilterRegex: '^(?!.*vcpkg_installed).*$'
+FormatStyle: none
