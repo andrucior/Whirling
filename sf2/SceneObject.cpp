@@ -86,7 +86,9 @@ void SceneObject::ReserveVertices(size_t vertexFloatCapacity, GLenum drawMode, G
 void SceneObject::UpdateVertices(const float* vertices, size_t vertexFloatCount, size_t vertexFloatOffset) const
 {
     if (vertexFloatCount == 0)
+    {
         return;
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
     glBufferSubData(GL_ARRAY_BUFFER, static_cast<GLintptr>(vertexFloatOffset * sizeof(float)),
@@ -127,7 +129,9 @@ void SceneObject::Draw(const ShaderProgram& shader, const glm::mat4& viewProject
 {
     const GLsizei count = m_DrawSource == DrawSource::Elements ? m_IndexCount : m_VertexCount;
     if (count == 0)
+    {
         return;
+    }
 
     glm::mat4 mvp = viewProjection * GetModelMatrix();
     shader.SetMat4("uMVP", mvp);
